@@ -1,0 +1,68 @@
+.jumbotron {
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  background-color: rgba(76, 207, 207, 0.452);
+}
+
+.container {
+  margin-top: 50px;
+}
+
+body {
+  background-image: url(../img/nature.jpg);
+  background: cover;
+  background-repeat: no-repeat;
+}
+
+.list-item {
+  color: rgba(0, 0, 0, 0.911);
+  font-size: 15px;
+  margin-bottom: 0;
+  border-bottom: 2px solid rgba(15, 53, 224, 0.575);
+  cursor: pointer;
+}
+
+.list-item.active {
+  background-color: rgba(32, 126, 214, 0.671);
+  color: #0f42e9;
+}
+
+.list-item:hover {
+  color: #0f42e9;
+}
+
+.list-item h5 {
+  margin-bottom: 0.25rem;
+}
+
+.list-item small {
+  color: rgb(0, 0, 0);
+}
+
+.list-item h5, .list-item small {
+  pointer-events: none;
+}
+
+.modal-content {
+  background-color: rgba(76, 207, 207, 0.589);
+}
+
+textarea.form-control {
+  background-color: rgba(179, 174, 174, 0.432);
+  border: none;
+  color: white;
+}
+
+input.form-control {
+  background-color: rgba(179, 174, 174, 0.432);
+  border: none;
+  color: white;
+  }
+
+.btnconstruction {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  justify-content: right;
+}
