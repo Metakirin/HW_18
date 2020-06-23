@@ -93,7 +93,7 @@ export class Content {
     const template = `
       <h3>${this.data.title} <i class="fas fa-paperclip"></i></h3>
       <h6 class="text-dark">${this.data.date}</h6>
-      <div class="text-light">${this.data.content}</div>
+      <div class="text-light">${this.data.html}</div>
     `;
 
     this._clear();

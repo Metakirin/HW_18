@@ -229,7 +229,7 @@ var Content = /*#__PURE__*/function () {
 
       var btnTrash = this._createTrashButton(this.data.id);
 
-      var template = "\n      <h3>".concat(this.data.title, " <i class=\"fas fa-paperclip\"></i></h3>\n      <h6 class=\"text-dark\">").concat(this.data.date, "</h6>\n      <div class=\"text-light\">").concat(this.data.content, "</div>\n    ");
+      var template = "\n      <h3>".concat(this.data.title, " <i class=\"fas fa-paperclip\"></i></h3>\n      <h6 class=\"text-dark\">").concat(this.data.date, "</h6>\n      <div class=\"text-light\">").concat(this.data.html, "</div>\n    ");
 
       this._clear();
 
@@ -421,7 +421,7 @@ var Form = /*#__PURE__*/function () {
     this.idField = document.querySelector('[name="id"]');
     this.dateField = document.querySelector('[name="date"]');
     this.btnSubmit = document.querySelector('[type="submit"]');
-    this.listContainer = document.querySelector('#list');
+    this.listContainer = document.querySelector("#list");
     this.list = new _list.List(this.listContainer);
     this.handleSubmit = this._submit.bind(this);
 
@@ -431,14 +431,20 @@ var Form = /*#__PURE__*/function () {
   _createClass(Form, [{
     key: "_init",
     value: function _init() {
-      this.btnSubmit.addEventListener('click', this.handleSubmit);
+      this.btnSubmit.addEventListener("click", this.handleSubmit);
     } // Добавить ноль перед числом
 
   }, {
     key: "_parseNumber",
     value: function _parseNumber(num) {
       var parsedNum = num;
-      return parsedNum < 10 ? '0' + parsedNum : parsedNum;
+      return parsedNum < 10 ? "0" + parsedNum : parsedNum;
+    }
+  }, {
+    key: "_parseStringToHtml",
+    value: function _parseStringToHtml(content) {
+      var resultContent = content.replace(/#(.+)/gim, "<h1>$1</h1>").replace(/#{2}(.+)/gim, "<h2>$1</h2>").replace(/#{3}(.+)/gim, "<h3>$1</h3>").replace(/#{4}(.+)/gim, "<h4>$1</h4>").replace(/(\*{2})(.+)(\*{2})/gim, "<strong>$2</strong>").replace(/(~{2})(.+)(~{2})/gim, "<strike>$2</strike>").replace(/(http[s]:\/\/)(.+)/gim, "<a href=\"$1$2\" target=\"_blank\" rel=\"noopener\">$1$2</a>").replace(/-{3}/gim, "<hr>").replace(/-\|/gim, "<br>").replace(/(\+{2})(.+)(\+{2})/gim, "<span class=\"text-success\">$2</span>").replace(/(\-{2})(.+)(\-{2})/gim, "<span class=\"text-danger\">$2</span>").replace(/\*(.+)/gim, "<ul> \n    <li>$1</li> \n    </ul>");
+      return resultContent;
     }
   }, {
     key: "_buildDate",
@@ -462,12 +468,12 @@ var Form = /*#__PURE__*/function () {
     value: function _send(data, method) {
       var _this = this;
 
-      var url = '/api/data';
-      if (method == 'PUT') url = url + "/".concat(data.id);
+      var url = "/api/data";
+      if (method == "PUT") url = url + "/".concat(data.id);
       fetch(url, {
         method: method,
         headers: {
-          'Content-Type': 'application/json;charset=utf-8'
+          "Content-Type": "application/json;charset=utf-8"
         },
         body: JSON.stringify(data)
       }).then(function (response) {
@@ -490,7 +496,7 @@ var Form = /*#__PURE__*/function () {
     key: "_submit",
     value: function _submit(event) {
       event.preventDefault();
-      var currentMethod = this.form.getAttribute('data-method');
+      var currentMethod = this.form.getAttribute("data-method");
       var currentDate = new Date();
 
       this._setMetaData(currentDate.getTime(), this._buildDate(currentDate));
@@ -515,10 +521,12 @@ var Form = /*#__PURE__*/function () {
         _iterator.f();
       }
 
+      data.html = this._parseStringToHtml(data.content);
+
       this._send(data, currentMethod);
 
       (0, _resetForm.resetForm)(this.form);
-      $('#formModal').modal('hide'); // Открыть модальное окно
+      $("#formModal").modal("hide"); // Открыть модальное окно
     }
   }]);
 
@@ -583,7 +591,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50441" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64439" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
